@@ -1,0 +1,58 @@
+/* About page — scroll reveal */
+.about-page .about-hero > *,
+.about-page .about-value-card,
+.about-page .about-story {
+    --reveal-distance: 24px;
+}
+
+/* Stagger the three value cards */
+.about-page .about-value-card:nth-child(1) {
+    --reveal-delay: 0ms;
+}
+
+.about-page .about-value-card:nth-child(2) {
+    --reveal-delay: 100ms;
+}
+
+.about-page .about-value-card:nth-child(3) {
+    --reveal-delay: 200ms;
+}
+
+
+.about-hero__grid {
+    background-image: radial-gradient(
+        circle,
+        rgb(37 99 235 / 12%) 1px,
+        transparent 1px
+    );
+    background-size: 24px 24px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 85%
+    );
+
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 85%
+    );
+}
+
+.contact-faq__answer {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 300ms ease, opacity 250ms ease;
+}
+
+.contact-faq__answer.is-open {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-faq__answer {
+        transition: none;
+    }
+}

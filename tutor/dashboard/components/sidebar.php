@@ -114,7 +114,16 @@ $icon_size        = $is_kids_mode ? Size::SIZE_24 : Size::SIZE_20;
 					$dashboard_key = '';
 				}
 
-				$is_active_menu  = $dashboard_key === $dashboard_page_slug;
+				// Point student course navigation to /dashboard/courses/
+				if ( User::is_student_view() && in_array( $original_key, array( 'courses', 'enrolled-courses' ), true ) ) {
+					$menu_link = tutor_utils()->tutor_dashboard_url( 'courses' );
+				}
+
+				$is_active_menu = ( $dashboard_key === $dashboard_page_slug );
+				if ( User::is_student_view() && in_array( $dashboard_page_slug, array( 'courses', 'enrolled-courses' ), true ) && in_array( $original_key, array( 'courses', 'enrolled-courses' ), true ) ) {
+					$is_active_menu = true;
+				}
+
 				$active_class    = $is_active_menu ? 'active' : '';
 				$data_no_instant = 'logout' === $dashboard_key
 					? 'data-no-instant'

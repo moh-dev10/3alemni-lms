@@ -15,7 +15,7 @@ use TUTOR\User;
 
 // If student view, load the student My Courses template
 if ( ! function_exists( 'tutor_utils' ) || ! tutor_utils()->is_instructor() || User::is_student_view() ) {
-	tutor_load_template( 'dashboard.enrolled-courses' );
+	include __DIR__ . '/enrolled-courses.php';
 	return;
 }
 

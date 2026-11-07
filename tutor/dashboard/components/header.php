@@ -80,6 +80,8 @@ $profile_avatar_size           = Size::SIZE_48;
 							$current_page = $wp_query->query_vars['tutor_dashboard_page'] ?? '';
 							if ( empty( $current_page ) ) {
 								esc_html_e( 'نظرة عامة', '3alemni' );
+							} elseif ( in_array( $current_page, array( 'courses', 'enrolled-courses' ), true ) ) {
+								esc_html_e( 'دوراتي', '3alemni' );
 							} else {
 								$dashboard_pages = tutor_utils()->tutor_dashboard_nav_ui_items();
 								$page_title      = $dashboard_pages[ $current_page ] ?? $current_page;

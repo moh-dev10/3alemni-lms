@@ -50,6 +50,7 @@ add_action( 'after_setup_theme', 'alemni_theme_setup' );
 function alemni_enqueue_assets(): void {
     $css_path = get_theme_file_path( '/assets/css/main.css' );
 
+    // Unified theme stylesheet compiled by Tailwind CSS v4 (includes design system tokens, primitives, Tutor LMS, and hero styling).
     if ( file_exists( $css_path ) ) {
         wp_enqueue_style(
             'alemni-main',
@@ -59,42 +60,16 @@ function alemni_enqueue_assets(): void {
         );
     }
 
-    // Tutor LMS styles overrides.
-    $tutor_css_path = get_theme_file_path( '/assets/css/tutor.css' );
-
-    if (
-        file_exists( $tutor_css_path )
-        && function_exists( 'tutor' )
-    ) {
-        wp_enqueue_style(
-            '3alemni-tutor',
-            get_theme_file_uri( '/assets/css/tutor.css' ),
-            [ 'alemni-main' ],
-            (string) filemtime( $tutor_css_path )
+    $scroll_reveal_path = get_theme_file_path( 'assets/js/scroll-reveal.js' );
+    if ( file_exists( $scroll_reveal_path ) ) {
+        wp_enqueue_script(
+            'alemni-scroll-reveal',
+            get_theme_file_uri( 'assets/js/scroll-reveal.js' ),
+            [],
+            (string) filemtime( $scroll_reveal_path ),
+            true
         );
     }
-
-    
-      $hero_css = '/assets/css/hero.css';
-      $hero_css_path = get_theme_file_path( $hero_css );
-      
-      if ( file_exists( $hero_css_path ) ) {
-          wp_enqueue_style(
-              'alemni-hero',
-              get_theme_file_uri( $hero_css ),
-              [],
-              (string) filemtime( $hero_css_path )
-          );
-      }
-
-      wp_enqueue_script(
-    'alemni-scroll-reveal',
-    get_theme_file_uri( 'assets/js/scroll-reveal.js' ),
-    [],
-    filemtime( get_theme_file_path( 'assets/js/scroll-reveal.js' ) ),
-    true
-);
-
 }
 add_action( 'wp_enqueue_scripts', 'alemni_enqueue_assets' );
 

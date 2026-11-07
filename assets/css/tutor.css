@@ -8,32 +8,29 @@
 ========================================================= */
 
 .alemni-dashboard {
-  --alemni-primary: #4f46e5;
-  --alemni-primary-hover: #3730a3;
-  --alemni-primary-soft: #eef2ff;
-  --alemni-accent: #8b5cf6;
+  --alemni-primary: var(--color-blue, #244ee8);
+  --alemni-primary-hover: var(--color-blue-dark, #1939b5);
+  --alemni-primary-soft: var(--color-blue-light, #eff3ff);
+  --alemni-accent: var(--color-blue, #244ee8);
 
-  --alemni-ink: #20231f;
-  --alemni-muted: #77786f;
-  --alemni-line: #e8e9f0;
-  --alemni-surface: #ffffff;
-  --alemni-background: #f7f8fc;
+  --alemni-ink: var(--color-ink, #1b1e1b);
+  --alemni-muted: var(--color-muted, #73766d);
+  --alemni-line: var(--color-line, #dfded5);
+  --alemni-surface: var(--color-surface, #ffffff);
+  --alemni-background: var(--color-paper, #f7f5ef);
 
-  --alemni-radius-sm: 9px;
-  --alemni-radius: 13px;
-  --alemni-radius-lg: 18px;
-  --alemni-radius-xl: 22px;
+  --alemni-radius-sm: var(--radius-sm, 6px);
+  --alemni-radius: var(--radius-md, 10px);
+  --alemni-radius-lg: var(--radius-lg, 14px);
+  --alemni-radius-xl: var(--radius-xl, 18px);
 
-  --alemni-shadow:
-    0 8px 28px rgb(15 23 42 / 5%);
-
-  --alemni-shadow-hover:
-    0 14px 32px rgb(79 70 229 / 9%);
+  --alemni-shadow: var(--shadow-subtle, 0 1px 3px rgba(27, 30, 27, 0.04));
+  --alemni-shadow-hover: var(--shadow-card-hover, 0 12px 26px -4px rgba(27, 30, 27, 0.08));
 
   color: var(--alemni-ink);
   background: var(--alemni-background);
   font-family: var(--font-sans), Arial, sans-serif;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .alemni-dashboard,
@@ -221,14 +218,14 @@
 
 .alemni-dashboard .alemni-dashboard-nav-link:hover {
   color: var(--alemni-primary);
-  background: #f7f7ff;
-  border-color: #eeeefe;
+  background: var(--color-blue-subtle, #f5f8ff);
+  border-color: rgba(36, 78, 232, 0.12);
 }
 
 .alemni-dashboard .alemni-dashboard-nav-link.active {
   color: var(--alemni-primary);
   background: var(--alemni-primary-soft);
-  border-color: #e0e7ff;
+  border-color: rgba(36, 78, 232, 0.22);
   font-weight: 600;
 }
 

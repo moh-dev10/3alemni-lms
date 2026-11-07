@@ -51,20 +51,62 @@ $profile_avatar_size           = Size::SIZE_48;
 
 		<div class="alemni-dashboard-header-left tutor-dashboard-header-left">
 
-			<div class="alemni-dashboard-heading">
-				<span class="alemni-dashboard-eyebrow">
-					<?php esc_html_e( 'YOUR LEARNING SPACE', 'tutor' ); ?>
-				</span>
+			<?php if ( ! $is_instructor_view ) : ?>
 
-				<h1 class="alemni-dashboard-greeting">
-					<span class="alemni-dashboard-greeting-muted">
-						<?php echo esc_html_x( 'Hi,', 'greetings', 'tutor' ); ?>
+				<div class="flex items-center gap-3">
+					<!-- Mobile Sidebar Toggle -->
+					<button
+						type="button"
+						class="alemni-dashboard-mobile-menu-toggle tutor-dashboard-menu-toggler flex md:hidden items-center justify-center size-9 rounded-lg border border-line bg-white text-ink shadow-subtle hover:bg-paper-subtle transition"
+						aria-label="<?php esc_attr_e( 'Toggle navigation', '3alemni' ); ?>"
+					>
+						<svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+						</svg>
+					</button>
+
+					<!-- Breadcrumbs / Page Context -->
+					<div class="flex items-center gap-2 text-xs text-muted">
+						<a
+							href="<?php echo esc_url( tutor_utils()->tutor_dashboard_url() ); ?>"
+							class="hover:text-blue transition font-medium flex items-center gap-1"
+						>
+							<span><?php esc_html_e( 'لوحة المتعلّم', '3alemni' ); ?></span>
+						</a>
+						<span class="text-line-strong">/</span>
+						<span class="text-ink font-semibold">
+							<?php
+							global $wp_query;
+							$current_page = $wp_query->query_vars['tutor_dashboard_page'] ?? '';
+							if ( empty( $current_page ) ) {
+								esc_html_e( 'نظرة عامة', '3alemni' );
+							} else {
+								$dashboard_pages = tutor_utils()->tutor_dashboard_nav_ui_items();
+								$page_title      = $dashboard_pages[ $current_page ] ?? $current_page;
+								if ( is_array( $page_title ) ) {
+									$page_title = $page_title['title'] ?? $current_page;
+								}
+								echo esc_html( $page_title );
+							}
+							?>
+						</span>
+					</div>
+				</div>
+
+			<?php else : ?>
+
+				<div class="alemni-dashboard-heading">
+					<span class="alemni-dashboard-eyebrow">
+						<?php esc_html_e( 'YOUR TEACHING SPACE', 'tutor' ); ?>
 					</span>
-					<?php echo esc_html( $display_name ); ?>
-					<span class="alemni-dashboard-greeting-emoji" aria-hidden="true">👋</span>
-				</h1>
 
-				<?php if ( $is_instructor_view ) : ?>
+					<h1 class="alemni-dashboard-greeting">
+						<span class="alemni-dashboard-greeting-muted">
+							<?php echo esc_html_x( 'Hi,', 'greetings', 'tutor' ); ?>
+						</span>
+						<?php echo esc_html( $display_name ); ?>
+						<span class="alemni-dashboard-greeting-emoji" aria-hidden="true">👋</span>
+					</h1>
 
 					<?php
 					$course_post_type = apply_filters(
@@ -86,12 +128,10 @@ $profile_avatar_size           = Size::SIZE_48;
 					?>
 
 					<div class="alemni-dashboard-header-stats">
-
 						<span class="alemni-dashboard-stat">
 							<span class="alemni-dashboard-stat-value">
 								<?php echo esc_html( number_format_i18n( $active_course_count ) ); ?>
 							</span>
-
 							<?php
 							echo esc_html(
 								_n(
@@ -110,7 +150,6 @@ $profile_avatar_size           = Size::SIZE_48;
 							<span class="alemni-dashboard-stat-value">
 								<?php echo esc_html( number_format_i18n( $enrolled_student_count ) ); ?>
 							</span>
-
 							<?php
 							echo esc_html(
 								_n(
@@ -122,17 +161,10 @@ $profile_avatar_size           = Size::SIZE_48;
 							);
 							?>
 						</span>
-
 					</div>
+				</div>
 
-				<?php else : ?>
-
-					<p class="alemni-dashboard-subtitle">
-						<?php esc_html_e( 'Continue your learning journey at your own pace.', 'tutor' ); ?>
-					</p>
-
-				<?php endif; ?>
-			</div>
+			<?php endif; ?>
 
 		</div>
 
